@@ -1,0 +1,56 @@
+1. Maven Surefire plugin - Execute test cases
+2. Maven Compiler plugin - Compile test cases and library code
+3. Maven failsafe plugin - Parallel execution
+4. Cucumber JUnit - Test running [ Test runner file ]
+5. Cucumber Java - io.cucumber.java - Given, When and Then import
+6. Selenium Java - webdriver
+7. Webdriver Manager - webdriver manage and initiate
+8. Cucumber 6 Adapter - Reporting ? (tech.grasshopper)
+
+-------------------------
+Pages :
+1. contains private data members
+2. and public methods [ in order to access the data members and constructors ]
+3. follows OOPs concepts [ Data Hiding + Encapsulation ]
+This is also called Page Object Model
+Where page is LoginPage.java
+Object - Username + Password + Any other locator
+Since we store multiple objects - we call it as Object Repository / Container
+
+-------------------------
+Factory :
+Inside a Project which is developed to automate an application like facebook
+we will have multiple test case files
+For each of the test case files, we should have this Selenium Java statement
+WebDriver driver = new ChromeDriver();
+We should rather have a single factory method responsible for initiating the driver
+This factory method is now stored in com.qa.factory
+
+-------------------------
+Utils :
+Inside this package we will have classes which are responsible for
+emailing the report to a certain group of people OR
+writing the logic to logging in into the Database
+
+-------------------------
+config.properties
+username
+password
+url
+browser
+db username
+db password
+db service name
+db host
+db port number
+
+-------------------------
+SRC - Single Responsibility concept
+Each class will be handling a single responsibility
+DriverFactory - Will return a webdriver object which has facility of parallel execution
+across any of the 3 browsers [ Edge + Chrome + Firefox ]
+
+-------------------------
+ConfigReader :
+will return a Properties Object which has facility of reading the properties file
+
