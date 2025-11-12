@@ -1,6 +1,5 @@
 package com.pages;
 
-import jdk.jpackage.internal.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -45,12 +44,13 @@ public class LoginPage {
         driver.findElement(signInButton).click();
     }
 
-    public void doLogin(String uName, String pwd)
+    public LandingPage doLogin(String uName, String pwd)
     {
         driver.findElement(emailId).sendKeys(uName);
         driver.findElement(password).sendKeys(pwd);
         driver.findElement(signInButton).click();
         System.out.println("Login button clicked successfully");
+        return new LandingPage(driver);
     }
 
 

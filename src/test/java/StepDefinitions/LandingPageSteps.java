@@ -4,11 +4,9 @@ import com.pages.LandingPage;
 import com.pages.LoginPage;
 import com.qa.factory.DriverFactory;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.junit.Assert;
 
 import java.util.List;
@@ -16,9 +14,9 @@ import java.util.Map;
 
 public class LandingPageSteps {
 
-    private LandingPage landingPage = new LandingPage(DriverFactory.getDriver());
+    private LandingPage landingPage;
     private LoginPage loginPage = new LoginPage(DriverFactory.getDriver());
-    private String landingPageActualTitle;
+
 
 
     @Given("User has already login access")
@@ -27,21 +25,17 @@ public class LandingPageSteps {
         String username = credentialList.get(0).get("username");
         String password = credentialList.get(0).get("password");
 
-        DriverFactory.getDriver().get("https://demowebshop.tricentis.com/");
-        loginPage.doLogin(username,password);
+        DriverFactory.getDriver().get("https://demowebshop.tricentis.com/login");
+        landingPage = loginPage.doLogin(username,password);
 
     }
 
     @Given("user is on landing page")
     public void userIsOnLandingPage() {
-
+        String title = landingPage.getLandingPageTitle();
+        System.out.println("Landing page title : " + title);
     }
 
-    @When("user gets the title of the landing page")
-    public void userGetsTheTitleOfTheLandingPage() {
-        landingPageActualTitle = landingPage.getLandingPageTitle();
-        System.out.println("Landing page title is : " + landingPageActualTitle);
-    }
 
     @Then("user gets different tabs")
     public void userGetsDifferentTabs(DataTable expectedTabsList) {
@@ -59,9 +53,6 @@ public class LandingPageSteps {
 
     }
 
-    @Then("title of the page should be {string}")
-    public void titleOfThePageShouldBe(String expectedLandingPageTitle) {
-        Assert.assertEquals(landingPageActualTitle, expectedLandingPageTitle);
-    }
+
 
 }

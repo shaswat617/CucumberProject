@@ -11,27 +11,18 @@ public class DriverFactory {
     public WebDriver driver;
     public static ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
 
-    public WebDriver initDriver(String browser)
-    {
+    public WebDriver initDriver(String browser) {
         System.out.println("Browser value is : " + browser);
-        if (browser.equals("chrome"))
-        {
+        if (browser.equals("chrome")) {
             driver = new ChromeDriver(); //WebDriverManager.chromeDriver.setup()
+            threadLocal.set(driver);// threadLocal.set(new ChromeDriver())
+        } else if (browser.equals("edge")) {
+            driver = new EdgeDriver();//WebDriverManager.edgeDriver.setup()
             threadLocal.set(driver);
-        }
-        else if(browser.equals("edge"))
-        {
-            driver = new EdgeDriver();
+        } else if (browser.equals("safari")) {
+            driver = new SafariDriver();//WebDriverManager.safariDriver.setup()
             threadLocal.set(driver);
-        }
-
-        else if (browser.equals("safari"))
-        {
-            driver = new SafariDriver();
-            threadLocal.set(driver);
-        }
-        else
-        {
+        } else {
             System.out.println("Incorrect browser value" + browser);
         }
 
@@ -42,8 +33,8 @@ public class DriverFactory {
 
         return getDriver();
     }
-    public static synchronized WebDriver getDriver()
-    {
+
+    public static synchronized WebDriver getDriver() {
         return threadLocal.get();
     }
 

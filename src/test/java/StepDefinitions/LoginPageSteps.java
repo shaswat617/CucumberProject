@@ -2,12 +2,10 @@ package StepDefinitions;
 
 import com.pages.LoginPage;
 import com.qa.factory.DriverFactory;
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.http.util.Asserts;
 import org.junit.Assert;
 
 public class LoginPageSteps {
@@ -17,12 +15,12 @@ public class LoginPageSteps {
 
     @Given("User is on login page")
     public void userIsOnLoginPage() {
-        DriverFactory.getDriver().get("url");
+        DriverFactory.getDriver().get("https://demowebshop.tricentis.com/login");
     }
 
 
-    @Then("page title should be {string}")
-    public void pageTitleShouldBe(String expectedTitle) {
+    @Then("title of the page should be {string}")
+    public void titleOfThePageShouldBe(String expectedTitle) {
         Assert.assertEquals(actualTitle, expectedTitle);
     }
 
@@ -41,8 +39,8 @@ public class LoginPageSteps {
         loginPage.clickOnLogin();
     }
 
-    @Then("user gets the title of the web page")
-    public void userGetsTheTitleOfTheWebPage() {
+    @When("user gets the title of the page")
+    public void userGetsTheTitleOfThePage() {
         actualTitle = loginPage.getLoginPageTitle();
         System.out.println("Login page title is : " + actualTitle);
     }
